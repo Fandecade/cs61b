@@ -85,10 +85,10 @@ public class IntList {
             return (A ==null) ? B : A;
         }
         IntList p =A;
-        while(p != null) {
+        while(p.rest != null) {
             p = p.rest;
         }
-        p =B;
+        p.rest =B;
         return A;
     }
 
@@ -97,19 +97,31 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        if(A == null) {
+        if(A != null) {
+            IntList L = new IntList(A.first , null);
+            IntList q = L;
+            IntList p = A.rest;
+            while(p != null) {
+                q.rest = new IntList(p.first,null);
+                q = q.rest;
+                p = p.rest;
+            }
+            q.rest = B;
+            return L;
+        }else if(B != null) {
+            IntList L = new IntList(B.first , null);
+            IntList q = L;
+            IntList p = B.rest;
+            while(p != null) {
+                q.rest = new IntList(p.first,null);
+                q = q.rest;
+                p = p.rest;
+            }
+            return L;
+        }else {
             return null;
         }
-        IntList L = new IntList(A.first , null);
-        IntList q = L;
-        IntList p = A.rest;
-        while(p != null) {
-            q.rest = new IntList(p.first,null);
-            q = q.rest;
-            p = p.rest;
-        }
-        q = B;
-        return L;
+
     }
 
 
