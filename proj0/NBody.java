@@ -41,6 +41,7 @@ public class NBody {
         StdDraw.setScale(-r, r);
         StdDraw.clear();
 
+
         
         StdDraw.enableDoubleBuffering();    //double buffering
         double waittime = 0;
@@ -66,7 +67,7 @@ public class NBody {
         }
 
         StdOut.printf("%d\n", planets.length);
-        StdOut.printf("%.2e\n", radius);
+        StdOut.printf("%.2e\n", r);
         for (int i = 0; i < planets.length; i++) {
             StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
                         planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
