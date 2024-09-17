@@ -30,8 +30,8 @@ public class NBody {
 
 
     public static void main(String[] args) {
-        double T = Double.parseDouble(args[0]);
-        double dt = Double.parseDouble(args[1]);
+        double T = new Double(args[0]);
+        double dt = new Double(args[1]);
         String filename = args[2];
 
         double r = readRadius(filename);
@@ -40,7 +40,6 @@ public class NBody {
         //drawing the background
         StdDraw.setScale(-r, r);
         StdDraw.clear();
-        StdDraw.picture(0,0,"images/starfield.jpg");
 
         
         StdDraw.enableDoubleBuffering();    //double buffering
