@@ -1,4 +1,5 @@
 public class LinkedListDeque<T> {
+    /** the node class*/
     public class node {    //创建双链表node结点
         public node pre;
         public T item;
@@ -15,8 +16,9 @@ public class LinkedListDeque<T> {
             this.next = next;
         }
     }
+
     private node dummy; //头结点
-    private int size = 0;   //记录双端队列大小
+    private int size ;   //记录双端队列大小
 
     public LinkedListDeque() {  //创建一个空链表队列（头结点的pre和next都指向自己）
         dummy = new node(null,null);    //初始化头结点
@@ -60,16 +62,11 @@ public class LinkedListDeque<T> {
     }
 
     public void printDeque() {
-        if(isEmpty()) {
-            return ;
-        }
-
         node p = dummy.next;
         while(p != dummy) {
-            System.out.println(p.item);
+            System.out.print(p.item +" ");
             p = p.next;
         }
-        System.out.print("");
     }
 
     public T removeFirst(){
@@ -112,6 +109,20 @@ public class LinkedListDeque<T> {
         return p == dummy ? null : p.item;
     }
 
+    private T getReverseHelper(node start, int index) {
+        if(index == 0) {
+            return start.item;
+        }
+        return getReverseHelper(start.next, index - 1);
+    }
+
+    public T getReverse(int index) {
+        if(index < 0 || index >= size) {
+            return null;
+        }
+        return getReverseHelper(dummy.next, index);
+    }
+
     public LinkedListDeque(LinkedListDeque other) {
         dummy =new node(null, null);
         dummy.next = dummy;
@@ -121,6 +132,4 @@ public class LinkedListDeque<T> {
             addLast((T)other.get(i));
         }
     }
-
-
 }

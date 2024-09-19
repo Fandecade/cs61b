@@ -1,4 +1,5 @@
 public class ArrayDeque<T> {
+
     private T[] array;
     private int size;
     private int length;
@@ -24,7 +25,7 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        if (size == array.length) { //数组满时，扩充数组
+        if(size == array.length) { //数组满时，扩充数组
             resize(array.length * 2);
         }
         array[front] = item;
@@ -33,7 +34,7 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if (size == array.length) {
+        if(size == array.length) {
             resize(array.length * 2);
         }
         array[rear] = item;
@@ -42,7 +43,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (size == 0) {
+        if(size == 0) {
             return null;
         }
         T item = array[front];
@@ -52,7 +53,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if (size == 0) {
+        if(size == 0) {
             return null;
         }
         T item = array[rear];
@@ -62,7 +63,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        if (index < 0 || index >= size) {
+        if(index < 0 || index >= size) {
             return null;
         }
         return array[(front + index) % array.length];
@@ -89,6 +90,7 @@ public class ArrayDeque<T> {
         rear = 0;
         size = other.size;
         length = other.size;
+        resize(length);
         while(front < rear) {
             array[front] = other.array[front];
             front = (front + 1) % array.length;
