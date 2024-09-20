@@ -74,16 +74,13 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        if(size == 0) {
-            return;
-        }
-        while(front < rear) {
+        for(int i = 0; i < size; i++){
             System.out.print(array[front] + " ");
             front = (front + 1) % array.length;
         }
         System.out.println();
     }
-
+/*
     public ArrayDeque(ArrayDeque<T> other) {
         array = (T[]) new Object[8];
         front = 0;
@@ -96,4 +93,5 @@ public class ArrayDeque<T> {
             front = (front + 1) % array.length;
         }
     }
+ */
 }

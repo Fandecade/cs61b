@@ -1,9 +1,9 @@
 public class LinkedListDeque<T> {
     /** the node class*/
     public class node {    //创建双链表node结点
-        public node pre;
-        public T item;
-        public node next;
+        private node pre;
+        private T item;
+        private node next;
 
         public  node(node pre, T item, node next) {  //node构造函数
             this.pre = pre;
@@ -17,7 +17,7 @@ public class LinkedListDeque<T> {
         }
     }
 
-    private node dummy; //头结点
+    private final node dummy; //头结点 设为final表示为常量
     private int size ;   //记录双端队列大小
 
     public LinkedListDeque() {  //创建一个空链表队列（头结点的pre和next都指向自己）
@@ -32,28 +32,16 @@ public class LinkedListDeque<T> {
     }
 
     public void addFirst(T item) {
-        if(this.isEmpty()) {
-            node s = new node(dummy, item, dummy);
-            dummy.next = s;
-            dummy.pre = s;
-        }else{
-            node s = new node(dummy, item, dummy.next);
-            dummy.next.pre = s;
-            dummy.next = s;
-        }
+        node s = new node(dummy, item, dummy.next);
+        dummy.next.pre = s;
+        dummy.next = s;
         size += 1;
     }
 
     public void addLast(T item) {
-        if(this.isEmpty()) {
-            node s = new node(dummy, item, dummy);
-            dummy.next = s;
-            dummy.pre = s;
-        }else {
-            node s = new node(dummy.pre, item, dummy);
-            dummy.pre.next = s;
-            dummy.pre = s;
-        }
+        node s = new node(dummy.pre, item, dummy);
+        dummy.pre.next = s;
+        dummy.pre = s;
         size += 1;
     }
 
@@ -67,34 +55,29 @@ public class LinkedListDeque<T> {
             System.out.print(p.item +" ");
             p = p.next;
         }
+        System.out.println();
     }
 
     public T removeFirst(){
-        if(isEmpty()) {
+        if(size == 0) {
             return null;
         }
-        node p =dummy.next; //待删元素
-        dummy.next = p.next;
-        p.next.pre = dummy;
-        size -= 1;
-        if(size == 0){
-            dummy.pre = dummy;
-        }
-        return p.item;
+        T item = dummy.next.item;
+        dummy.next.next.pre = dummy;
+        dummy.next =dummy.next.next;
+        size--;
+        return item;
     }
 
     public T removeLast() {
-        if(isEmpty()) {
+        if(size == 0) {
             return null;
         }
-        node p = dummy.pre; //最后一个元素
-        p.pre.next = dummy;
-        dummy.pre = p.pre;
-        size -= 1;
-        if(size == 0){
-            dummy.next = dummy;
-        }
-        return p.item;
+        T item = dummy.pre.item;
+        dummy.pre.pre.next = dummy;
+        dummy.pre = dummy.pre.pre;
+        size--;
+        return item;
     }
 
     public T get(int index) {
@@ -123,13 +106,4 @@ public class LinkedListDeque<T> {
         return getReverseHelper(dummy.next, index);
     }
 
-    public LinkedListDeque(LinkedListDeque other) {
-        dummy =new node(null, null);
-        dummy.next = dummy;
-        dummy.pre = dummy;
-        size = 0;
-        for(int i = 0; i < other.size(); i++) {
-            addLast((T)other.get(i));
-        }
-    }
 }
