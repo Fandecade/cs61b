@@ -1,4 +1,4 @@
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T> {
     /** the node class*/
     public class node {    //创建双链表node结点
         private node pre;
@@ -27,6 +27,7 @@ public class LinkedListDeque<T> {
         size = 0;   //初始化大小为0
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -38,6 +39,7 @@ public class LinkedListDeque<T> {
         size ++;
     }
 
+    @Override
     public void addLast(T item) {
         node s = new node(dummy.pre, item, dummy);
         dummy.pre.next = s;
@@ -45,10 +47,12 @@ public class LinkedListDeque<T> {
         size ++;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public void printDeque() {
         node p = dummy.next;
         while(p != dummy) {
@@ -58,6 +62,7 @@ public class LinkedListDeque<T> {
         System.out.println();
     }
 
+    @Override
     public T removeFirst(){
         if(size == 0) {
             return null;
@@ -69,6 +74,7 @@ public class LinkedListDeque<T> {
         return item;
     }
 
+    @Override
     public T removeLast() {
         if(size == 0) {
             return null;
@@ -80,6 +86,7 @@ public class LinkedListDeque<T> {
         return item;
     }
 
+    @Override
     public T get(int index) {
         if(isEmpty()) {
             return null;
