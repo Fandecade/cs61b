@@ -28,7 +28,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addFirst(T item) {
-        if(size == array.length) { //数组满时，扩充数组
+        if(size == array.length){ //数组满时，扩充数组
             resize(array.length * 2);
         }
         array[front] = item;
@@ -38,7 +38,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void addLast(T item) {
-        if(size == array.length) {
+        if(size == array.length){
             resize(array.length * 2);
         }
         array[rear] = item;
@@ -59,7 +59,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T removeLast() {
-        if(size == 0) {
+        if(size == 0){
             return null;
         }
         T item = array[rear];
@@ -70,7 +70,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        if(index < 0 || index >= size) {
+        if(index < 0 || index >= size){
             return null;
         }
         return array[(front + index) % array.length];
